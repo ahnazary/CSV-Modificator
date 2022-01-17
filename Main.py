@@ -16,7 +16,8 @@ for file in glob.glob(path):
     readContent = ReadContent(file)
 
     if ReadContent.getFileFormat(file) == "csv":
-        readContent.removeDuplicateRowsFromCSV()
+        # readContent.removeDuplicateRowsFromCSV()
+        readContent.checkVehicleCount()
         print("first row is : ", readContent.getFirstRow())
         print("last row is : ", readContent.getLastRow())
         print("headers are : ", readContent.getHeaders())

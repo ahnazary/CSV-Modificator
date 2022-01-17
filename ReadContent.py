@@ -42,14 +42,7 @@ class ReadContent():
                     self.newRows.append(tempList)
 
             # creating address for the new CSV file to be written
-            my_path = os.path.abspath(os.path.dirname(__file__)) + "/input files/"
-            temp = self.fileAddress.split("/")[-1].split(".")[0] + ".csv"
-            pathToWriteCSV = os.path.join(my_path, temp)
-            with open(pathToWriteCSV, 'w') as file:
-                write = csv.writer(file)
-                write.writerow(self.newHeader)
-                write.writerows(self.newRows)
-            file.close()
+            self.writeNewCSVFile(self.newHeader, self.newRows)
 
     def getFirstRow(self):
         return self.rows[0]
@@ -74,11 +67,30 @@ class ReadContent():
             if elem not in newRows:
                 newRows.append(elem)
         self.newRows = newRows
+        # my_path = os.path.abspath(os.path.dirname(__file__)) + "/input files/"
+        # temp = self.fileAddress.split("/")[-1].split(".")[0] + ".csv"
+        # pathToWriteCSV = os.path.join(my_path, temp)
+        # with open(pathToWriteCSV, 'w') as file:
+        #     write = csv.writer(file)
+        #     write.writerow(self.newHeader)
+        #     write.writerows(self.newRows)
+        # file.close()
+        #
+        self.writeNewCSVFile(self.newHeader, self.newRows)
+
+    def checkVehicleCount(self):
+        if 'vehicleCount' in self.header:
+            index = self.header.index("vehicleCount")
+            for item in self.rows:
+                if item[index] == '0':
+                    self.rows.remove(item)
+
+    def writeNewCSVFile(self, headers, rows):
         my_path = os.path.abspath(os.path.dirname(__file__)) + "/input files/"
-        temp =  self.fileAddress.split("/")[-1].split(".")[0] + ".csv"
+        temp = self.fileAddress.split("/")[-1].split(".")[0] + ".csv"
         pathToWriteCSV = os.path.join(my_path, temp)
         with open(pathToWriteCSV, 'w') as file:
             write = csv.writer(file)
-            write.writerow(self.newHeader)
-            write.writerows(self.newRows)
+            write.writerow(headers)
+            write.writerows(rows)
         file.close()
