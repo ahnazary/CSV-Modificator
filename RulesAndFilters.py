@@ -13,13 +13,17 @@ class RulesAndFilters(ReadContent):
                 if columnName in self.header:
                     index = self.header.index(columnName)
                     for row in self.rows:
-                        if self.checkTypeOfVariable(row[index], int):
+                        try:
+                            int(row[index])
                             if int(row[index]) == value:
                                 print("Invalid value : ", row)
                                 rowsToBeDeleted += 1
                                 self.rows.remove(row)
+                        except:
+                            continue
                     return rowsToBeDeleted
 
+            removeInvalids()
             while removeInvalids() != 0 and removeInvalids() is not None:
                 removeInvalids()
             ReadContent.writeNewCSVFile(self, self.header, self.rows)
@@ -30,11 +34,14 @@ class RulesAndFilters(ReadContent):
                 if columnName in self.header:
                     index = self.header.index(columnName)
                     for row in self.rows:
-                        if self.checkTypeOfVariable(row[index], int):
+                        try:
+                            int(row[index])
                             if int(row[index]) < value:
                                 print("Invalid value : ", row)
                                 rowsToBeDeleted += 1
                                 self.rows.remove(row)
+                        except:
+                            continue
                     return rowsToBeDeleted
 
             while removeInvalids() != 0 and removeInvalids() is not None:
@@ -47,11 +54,14 @@ class RulesAndFilters(ReadContent):
                 if columnName in self.header:
                     index = self.header.index(columnName)
                     for row in self.rows:
-                        if self.checkTypeOfVariable(row[index], int):
+                        try:
+                            int(row[index])
                             if int(row[index]) > value:
                                 print("Invalid value : ", row)
                                 rowsToBeDeleted += 1
                                 self.rows.remove(row)
+                        except:
+                            continue
                     return rowsToBeDeleted
 
             while removeInvalids() != 0 and removeInvalids() is not None:

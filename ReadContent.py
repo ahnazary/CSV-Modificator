@@ -11,6 +11,7 @@ class ReadContent():
         self.fileAddress = fileAddress
         self.header = []
         self.rows = []
+        self.fileName = self.fileAddress.split('/')[-1].split('.')[0]
 
         # checks if the format is CSV
         if fileAddress.split('.')[-1].lower() == "csv":
@@ -34,7 +35,7 @@ class ReadContent():
 
             # headers of the new CSV file that is going to be generated from JSON objects
             self.header.append("TIMESTAMP")
-            self.header.append("Output")
+            self.header.append(self.fileName)
 
             # rows of the new CSV file that is going to be generated from JSON objects
             for obj in JSONObjects:
@@ -125,7 +126,5 @@ class ReadContent():
         try:
             if isinstance(var, typeOfVar):
                 return True
-            else:
-                return False
         except:
             return False
