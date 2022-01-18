@@ -20,8 +20,10 @@ for file in glob.glob(path):
 
         rulesAndFilters = RulesAndFilters(file)
 
-        rulesAndFilters.removeDuplicateRowsFromCSV()
-        rulesAndFilters.checkVehicleCount()
+        # rulesAndFilters.removeDuplicateRowsFromCSV()
+        rulesAndFilters.setValueRange("vehicleCount", "not equal", 0)
+        rulesAndFilters.setValueRange("avgSpeed", "smaller than", 60)
+        rulesAndFilters.checkTypeOfValue("avgSpeed", int)
         rulesAndFilters.removeInvalidTimeStamps()
         rulesAndFilters.removeTimeStampsNotDividableBy5()
 

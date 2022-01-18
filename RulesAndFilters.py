@@ -5,23 +5,58 @@ class RulesAndFilters(ReadContent):
     def __init__(self, fileAddress):
         super().__init__(fileAddress)
 
-    def checkVehicleCount(self):
+    def setValueRange(self, columnName, condition, value):
 
-        def removeInvalids():
-            rowsToBeDeleted = 0
-            if 'vehicleCount' in self.header:
-                index = self.header.index("vehicleCount")
-                for row in self.rows:
-                    if int(row[index]) == 0:
-                        print("Invalid Vehicle Count : ", row)
-                        rowsToBeDeleted += 1
-                        self.rows.remove(row)
-                return rowsToBeDeleted
+        if condition.lower() == "not equal":
+            def removeInvalids():
+                rowsToBeDeleted = 0
+                if columnName in self.header:
+                    index = self.header.index(columnName)
+                    for row in self.rows:
+                        if self.checkTypeOfVariable(row[index], int):
+                            if int(row[index]) == value:
+                                print("Invalid value : ", row)
+                                rowsToBeDeleted += 1
+                                self.rows.remove(row)
+                    return rowsToBeDeleted
 
-        while removeInvalids() != 0 and removeInvalids() is not None:
-            removeInvalids()
+            while removeInvalids() != 0 and removeInvalids() is not None:
+                removeInvalids()
+            ReadContent.writeNewCSVFile(self, self.header, self.rows)
 
-        ReadContent.writeNewCSVFile(self, self.header, self.rows)
+        elif condition.lower() == "greater than":
+            def removeInvalids():
+                rowsToBeDeleted = 0
+                if columnName in self.header:
+                    index = self.header.index(columnName)
+                    for row in self.rows:
+                        if self.checkTypeOfVariable(row[index], int):
+                            if int(row[index]) < value:
+                                print("Invalid value : ", row)
+                                rowsToBeDeleted += 1
+                                self.rows.remove(row)
+                    return rowsToBeDeleted
+
+            while removeInvalids() != 0 and removeInvalids() is not None:
+                removeInvalids()
+            ReadContent.writeNewCSVFile(self, self.header, self.rows)
+
+        elif condition.lower() == "lower than" or condition.lower() == "smaller than":
+            def removeInvalids():
+                rowsToBeDeleted = 0
+                if columnName in self.header:
+                    index = self.header.index(columnName)
+                    for row in self.rows:
+                        if self.checkTypeOfVariable(row[index], int):
+                            if int(row[index]) > value:
+                                print("Invalid value : ", row)
+                                rowsToBeDeleted += 1
+                                self.rows.remove(row)
+                    return rowsToBeDeleted
+
+            while removeInvalids() != 0 and removeInvalids() is not None:
+                removeInvalids()
+            ReadContent.writeNewCSVFile(self, self.header, self.rows)
 
     def removeDuplicateRowsFromCSV(self):
         newRows = []
@@ -45,6 +80,18 @@ class RulesAndFilters(ReadContent):
                         self.rows.remove(row)
 
         ReadContent.writeNewCSVFile(self, self.header, self.rows)
+        
+    def checkTypeOfValue(self, columnName, typeOfValue):
+        for item in self.header:
+            if columnName in item.lower():
+                index = self.header.index(item)
+
+                for row in self.rows:
+                    if not self.checkTypeOfVariable(row[index], typeOfValue):
+                        print("Invalid value type : ", row)
+                        self.rows.remove(row)
+
+        ReadContent.writeNewCSVFile(self, self.header, self.rows)
 
     def removeTimeStampsNotDividableBy5(self):
         for item in self.header:
@@ -64,3 +111,11 @@ class RulesAndFilters(ReadContent):
                             self.rows.remove(row)
 
         ReadContent.writeNewCSVFile(self, self.header, self.rows)
+
+    @staticmethod
+    def checkTypeOfVariable(var, typeOfVar):
+        try:
+            if isinstance(var, typeOfVar):
+                return True
+        except:
+            return False

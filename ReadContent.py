@@ -3,13 +3,12 @@ import json
 import os
 from dateutil.parser import parse
 
+
 class ReadContent():
     def __init__(self, fileAddress):
         self.fileAddress = fileAddress
         self.header = []
         self.rows = []
-        # self.newHeader = []
-        # self.newRows = []
 
         # checks if the format is CSV
         if fileAddress.split('.')[-1].lower() == "csv":
