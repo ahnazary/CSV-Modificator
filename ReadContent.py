@@ -156,18 +156,16 @@ class ReadContent():
         heights = []
         for item in barsList:
             heights.append(self.getAvgValueOfColumn(item))
+            print(self.getAvgValueOfColumn(item))
 
         bars = tuple(barsList)
         y_pos = numpy.arange(len(bars))
-
-        print(barsList)
-        print(heights)
+        plt.subplots_adjust(left=0.1, bottom=0.25, right=0.9, top=0.9)
 
         # Create bars
-        plt.bar(y_pos, heights)
+        plt.bar(y_pos, heights, width=0.5)
 
         # Create names on the x-axis
-        plt.xticks(y_pos, bars)
+        plt.xticks(y_pos, bars, rotation=45)
 
-        # Show graphic
         plt.show()

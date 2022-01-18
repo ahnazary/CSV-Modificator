@@ -5,10 +5,9 @@ class RulesAndFilters(ReadContent):
     def __init__(self, fileAddress):
         super().__init__(fileAddress)
 
-    def setValueRange(self, columnName, condition, value):
+    def setValueRange(self, columnName, value, **kwargs):
 
-        conditions = ["not equal", "greater than", "lower than", "smaller than"]
-        if condition.lower() == "not equal":
+        if kwargs.get('condition') == 'not equal':
             def removeInvalids():
                 rowsToBeDeleted = 0
                 if columnName in self.header:
@@ -29,7 +28,7 @@ class RulesAndFilters(ReadContent):
                 removeInvalids()
             ReadContent.writeNewCSVFile(self, self.header, self.rows)
 
-        elif condition.lower() == "greater than":
+        elif kwargs.get('condition') == 'greater than':
             def removeInvalids():
                 rowsToBeDeleted = 0
                 if columnName in self.header:
@@ -49,7 +48,7 @@ class RulesAndFilters(ReadContent):
                 removeInvalids()
             ReadContent.writeNewCSVFile(self, self.header, self.rows)
 
-        elif condition.lower() == "lower than" or condition.lower() == "smaller than":
+        elif kwargs.get('condition') == 'smaller than':
             def removeInvalids():
                 rowsToBeDeleted = 0
                 if columnName in self.header:
