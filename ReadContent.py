@@ -1,6 +1,8 @@
 import csv
 import json
 import os
+
+import numpy
 from dateutil.parser import parse
 
 
@@ -81,4 +83,49 @@ class ReadContent():
         except ValueError:
             return False
 
+    def getMaxValueOfColumn(self, columnName):
+        if columnName in self.header:
+            tempList = []
+            max([], default="EMPTY")
+            index = self.header.index(columnName)
+            for row in self.rows:
+                try:
+                    tempList.append(int(row[index]))
+                except:
+                    continue
+            return max(tempList)
 
+    def getMinValueOfColumn(self, columnName):
+        if columnName in self.header:
+            tempList = []
+            min([], default="EMPTY")
+            index = self.header.index(columnName)
+            for row in self.rows:
+                try:
+                    tempList.append(int(row[index]))
+                except:
+                    continue
+            return min(tempList)
+
+    def getAvgValueOfColumn(self, columnName):
+        if columnName in self.header:
+            tempList = []
+            index = self.header.index(columnName)
+            for row in self.rows:
+                try:
+                    tempList.append(int(row[index]))
+                except:
+                    continue
+
+            npArr = numpy.array(tempList)
+            return numpy.mean(npArr)
+
+    @staticmethod
+    def checkTypeOfVariable(var, typeOfVar):
+        try:
+            if isinstance(var, typeOfVar):
+                return True
+            else:
+                return False
+        except:
+            return False
