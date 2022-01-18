@@ -27,12 +27,10 @@ class RulesAndFilters(ReadContent):
     def removeDuplicateRowsFromCSV(self):
         newRows = []
         for row in self.rows:
-            repeats = 1
             if row not in newRows:
                 newRows.append(row)
             elif row in newRows:
-                repeats += 1
-                print("Duplicate Row : ", row, "repeats: ", repeats)
+                print("Duplicate Row : ", row)
         self.rows = newRows
 
         self.writeNewCSVFile(self.header, self.rows)

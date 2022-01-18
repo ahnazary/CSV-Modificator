@@ -20,7 +20,7 @@ for file in glob.glob(path):
 
         rulesAndFilters = RulesAndFilters(file)
 
-        # rulesAndFilters.removeDuplicateRowsFromCSV()
+        rulesAndFilters.removeDuplicateRowsFromCSV()
         rulesAndFilters.checkVehicleCount()
         rulesAndFilters.removeInvalidTimeStamps()
         rulesAndFilters.removeTimeStampsNotDividableBy5()
