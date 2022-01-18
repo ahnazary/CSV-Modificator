@@ -1,8 +1,9 @@
 import csv
 import json
 import os
-
+import matplotlib.pyplot as plt
 import numpy
+
 from dateutil.parser import parse
 
 
@@ -11,7 +12,7 @@ class ReadContent():
         self.fileAddress = fileAddress
         self.header = []
         self.rows = []
-        self.fileName = self.fileAddress.split('/')[-1].split('.')[0]
+        fileName = self.fileAddress.split('/')[-1].split('.')[0]
 
         # checks if the format is CSV
         if fileAddress.split('.')[-1].lower() == "csv":
@@ -35,7 +36,7 @@ class ReadContent():
 
             # headers of the new CSV file that is going to be generated from JSON objects
             self.header.append("TIMESTAMP")
-            self.header.append(self.fileName)
+            self.header.append(fileName)
 
             # rows of the new CSV file that is going to be generated from JSON objects
             for obj in JSONObjects:
@@ -126,5 +127,47 @@ class ReadContent():
         try:
             if isinstance(var, typeOfVar):
                 return True
+            else:
+                return False
         except:
             return False
+
+    def plotFromCSV(self, *args):
+
+        intColumns = []
+        if len(args) == 0:
+            for item in self.rows[0]:
+                try:
+                    int(item)
+                    intColumns.append(self.rows[0].index(item))
+                except:
+                    continue
+        else:
+            for item in args:
+                if item in self.header:
+                    intColumns.append(self.header.index(item))
+            if len(intColumns) == 0:
+                return
+
+        barsList = []
+        for item in intColumns:
+            barsList.append(self.header[item])
+
+        heights = []
+        for item in barsList:
+            heights.append(self.getAvgValueOfColumn(item))
+
+        bars = tuple(barsList)
+        y_pos = numpy.arange(len(bars))
+
+        print(barsList)
+        print(heights)
+
+        # Create bars
+        plt.bar(y_pos, heights)
+
+        # Create names on the x-axis
+        plt.xticks(y_pos, bars)
+
+        # Show graphic
+        plt.show()

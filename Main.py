@@ -23,11 +23,14 @@ for file in glob.glob(path):
         # rulesAndFilters.removeDuplicateRowsFromCSV()
         rulesAndFilters.setValueRange("vehicleCount", "not equal", 0)
         rulesAndFilters.setValueRange("avgSpeed", "smaller than", 60)
+        rulesAndFilters.setValueRange("avgSpeed", "not equal", 0)
         rulesAndFilters.checkTypeOfValue("avgSpeed", int)
         rulesAndFilters.removeInvalidTimeStamps()
         rulesAndFilters.removeTimeStampsNotDividableBy5()
+        readContent.plotFromCSV("avgSpeed", "vehicleCount")
 
-        # print("Avg is : ", readContent.getAvgValueOfColumn("avgSpeed"))
+
+        print("Avg is : ", readContent.getAvgValueOfColumn("avgMeasuredTime"))
         # print("min is : ", readContent.getMinValueOfColumn("avgSpeed"))
         # print("max is : ", readContent.getMaxValueOfColumn("avgSpeed"))
         print("first row is : ", readContent.getFirstRow())

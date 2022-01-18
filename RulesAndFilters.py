@@ -7,6 +7,7 @@ class RulesAndFilters(ReadContent):
 
     def setValueRange(self, columnName, condition, value):
 
+        conditions = ["not equal", "greater than", "lower than", "smaller than"]
         if condition.lower() == "not equal":
             def removeInvalids():
                 rowsToBeDeleted = 0
@@ -121,11 +122,3 @@ class RulesAndFilters(ReadContent):
                             self.rows.remove(row)
 
         ReadContent.writeNewCSVFile(self, self.header, self.rows)
-
-    @staticmethod
-    def checkTypeOfVariable(var, typeOfVar):
-        try:
-            if isinstance(var, typeOfVar):
-                return True
-        except:
-            return False
