@@ -18,7 +18,6 @@ class RulesAndFilters(ReadContent):
                         self.rows.remove(row)
                 return rowsToBeDeleted
 
-        print("rows to be deleted :", removeInvalids())
         while removeInvalids() != 0 and removeInvalids() is not None:
             removeInvalids()
 
