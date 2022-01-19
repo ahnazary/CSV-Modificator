@@ -121,3 +121,10 @@ class RulesAndFilters(ReadContent):
                             self.rows.remove(row)
 
         ReadContent.writeNewCSVFile(self, self.header, self.rows)
+
+    def cleaning(self):
+        self.setValueRange("vehicleCount", 0, condition="not equal")
+        self.setValueRange("avgSpeed", 60, condition="smaller than")
+        self.checkTypeOfValue("avgSpeed", int)
+        self.removeInvalidTimeStamps()
+        self.removeTimeStampsNotDividableBy5()
