@@ -17,25 +17,22 @@ for file in glob.glob(path):
 
         rulesAndFilters = RulesAndFilters(file)
 
-        # rulesAndFilters.removeDuplicateRowsFromCSV()
-        # rulesAndFilters.setValueRange("vehicleCount", 0, condition="not equal")
-        # rulesAndFilters.setValueRange("avgSpeed", 60, condition="smaller than")
-        # rulesAndFilters.checkTypeOfValue("avgSpeed", int)
-        # rulesAndFilters.removeInvalidTimeStamps()
-        # rulesAndFilters.removeTimeStampsNotDividableBy5()
-        #
-        # readContent = ReadContent(file)
+        rulesAndFilters.removeDuplicateRowsFromCSV()
+        rulesAndFilters.setValueRange("vehicleCount", 0, condition="not equal")
+        rulesAndFilters.setValueRange("avgSpeed", 60, condition="smaller than")
+        rulesAndFilters.checkTypeOfValue("avgSpeed", int)
+        rulesAndFilters.removeInvalidTimeStamps()
+        rulesAndFilters.removeTimeStampsNotDividableBy5()
 
-        # ReadContent.reverseGeocode(56.23172069428216, 10.104986076057457)
-
+        readContent = ReadContent(file)
+        
         # readContent.plotFromCSV()
-
-        # print("Avg is : ", readContent.getAvgValueOfColumn("avgMeasuredTime"))
-        # print("min is : ", readContent.getMinValueOfColumn("avgSpeed"))
-        # print("max is : ", readContent.getMaxValueOfColumn("avgSpeed"))
-        # print("first row is : ", readContent.getFirstRow())
-        # print("last row is : ", readContent.getLastRow())
-        # print("headers are : ", readContent.getHeaders())
-        # print("number of rows is : ", readContent.getSize(), "\n")
+        print("Avg is : ", readContent.getAvgValueOfColumn("avgMeasuredTime"))
+        print("min is : ", readContent.getMinValueOfColumn("avgSpeed"))
+        print("max is : ", readContent.getMaxValueOfColumn("avgSpeed"))
+        print("first row is : ", readContent.getFirstRow())
+        print("last row is : ", readContent.getLastRow())
+        print("headers are : ", readContent.getHeaders())
+        print("number of rows is : ", readContent.getSize(), "\n")
 
 ReadContent.plotLineChart("pollutionData158324.csv", "trafficData158324.csv", "carbon_monoxide", "vehicleCount")
