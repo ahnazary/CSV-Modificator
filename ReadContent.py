@@ -3,6 +3,8 @@ import json
 import os
 import matplotlib.pyplot as plt
 import numpy
+import reverse_geocoder as rg
+import pprint
 
 from dateutil.parser import parse
 
@@ -169,3 +171,15 @@ class ReadContent():
         plt.xticks(y_pos, bars, rotation=45)
 
         plt.show()
+
+    @staticmethod
+    def reverseGeocode(self, coordinates):
+        result = rg.search(coordinates)
+
+        # result is a list containing ordered dictionary.
+        pprint.pprint(result)
+
+        # coordinates = (56.23172069428216, 10.104986076057457)
+        # reverseGeocode(coordinates)
+        # print(rg.search(coordinates))
+

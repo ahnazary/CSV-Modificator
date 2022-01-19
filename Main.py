@@ -26,8 +26,8 @@ for file in glob.glob(path):
 
         readContent = ReadContent(file)
 
-        readContent.plotFromCSV()
-        print("Avg is : ", readContent.getAvgValueOfColumn("avgMeasuredTime"))
+        # readContent.plotFromCSV()
+        # print("Avg is : ", readContent.getAvgValueOfColumn("avgMeasuredTime"))
         # print("min is : ", readContent.getMinValueOfColumn("avgSpeed"))
         # print("max is : ", readContent.getMaxValueOfColumn("avgSpeed"))
         print("first row is : ", readContent.getFirstRow())
