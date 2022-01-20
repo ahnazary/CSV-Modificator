@@ -192,7 +192,7 @@ class ReadContent():
 
         retrieveAddress = RetrieveAddress()
 
-        if len(indexesList) == 0:
+        if len(indexesList) == 0 or "Formatted Address" in self.header:
             return
         else:
             self.header.append("Formatted Address")
