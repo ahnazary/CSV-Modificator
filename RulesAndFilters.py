@@ -128,3 +128,5 @@ class RulesAndFilters(ReadContent):
         self.checkTypeOfValue("avgSpeed", int)
         self.removeInvalidTimeStamps()
         self.removeTimeStampsNotDividableBy5()
+
+
