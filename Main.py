@@ -7,7 +7,6 @@ from RulesAndFilters import RulesAndFilters
 my_path = os.path.abspath(os.path.dirname(__file__))
 path = os.path.join(my_path, "input files/*")
 
-
 for file in glob.glob(path):
     if ReadContent.getFileFormat(file) == "txt":
         readContent = ReadContent(file)
@@ -17,6 +16,9 @@ for file in glob.glob(path):
         print("file is: ", file)
 
         rulesAndFilters = RulesAndFilters(file)
+        rulesAndFilters.removeRowsThatViolateAllConditions([{"header": "vehicleCount", "value": 0, "condition": "not equal"},
+                                    {"header": "avgSpeed", "value": 60, "condition": "smaller than"},
+                                    {"header": "sulfure_dioxide", "value": 60, "condition": "smaller than"}])
 
         # rulesAndFilters.removeDuplicateRowsFromCSV()
         # rulesAndFilters.setValueRange("vehicleCount", 0, condition="not equal")
@@ -26,7 +28,7 @@ for file in glob.glob(path):
         # rulesAndFilters.removeTimeStampsNotDividableBy5()
 
         readContent = ReadContent(file)
-        readContent.createFormattedAddressColumn()
+        # readContent.createFormattedAddressColumn()
 
         # readContent.plotFromCSV()
         # print("Avg is : ", readContent.getAvgValueOfColumn("avgMeasuredTime"))

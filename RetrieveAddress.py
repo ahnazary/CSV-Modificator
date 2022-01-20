@@ -6,6 +6,7 @@ import ssl
 conn = sqlite3.connect('Addresses.sqlite')
 cur = conn.cursor()
 
+
 class RetrieveAddress:
     def __init__(self):
         cur.executescript('''
