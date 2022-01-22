@@ -7,6 +7,8 @@ import numpy as np
 import pandas as pd
 import reverse_geocoder as rg
 import datetime
+from datetime import datetime
+from dateutil import parser
 
 from dateutil.parser import parse
 
@@ -140,7 +142,7 @@ class ReadContent():
         except:
             return False
 
-    def plotFromCSV(self, *args):
+    def plotFromBarChartForOneCSV(self, *args):
 
         intColumns = []
         if len(args) == 0:
@@ -205,7 +207,6 @@ class ReadContent():
 
         self.writeNewCSVFile(self.header, self.rows)
 
-
     @staticmethod
     def plotLineChart(firstFile, secondFile, *yLabels):
         files = []
@@ -268,16 +269,159 @@ class ReadContent():
 
                     plt.show()
 
-        # for item in xValues:
-        #     if 'T' not in item:
-        #         temp = item.split(' ')
-        #         xValues[xValues.index(item)] = temp[0] + 'T' + temp[1]
-        #
-        # dates = [datetime.datetime.strptime(ts, "%Y-%m-%dT%H:%M:%S") for ts in xValues]
-        # dates.sort()
-        # sortedDates = ([datetime.datetime.strftime(ts, "%Y-%m-%dT%H:%M:%S") for ts in dates])
-        # for item in sortedDates:
-        #     finalXValues.append(item)
-        # finalXValues = list(dict.fromkeys(finalXValues))
+            # for item in xValues:
+            #     if 'T' not in item:
+            #         temp = item.split(' ')
+            #         xValues[xValues.index(item)] = temp[0] + 'T' + temp[1]
+            #
+            # dates = [datetime.datetime.strptime(ts, "%Y-%m-%dT%H:%M:%S") for ts in xValues]
+            # dates.sort()
+            # sortedDates = ([datetime.datetime.strftime(ts, "%Y-%m-%dT%H:%M:%S") for ts in dates])
+            # for item in sortedDates:
+            #     finalXValues.append(item)
+            # finalXValues = list(dict.fromkeys(finalXValues))
 
             fh.close()
+
+    @staticmethod
+    def plotOneLineChartFromMultipleFiles(filesList, headersList):
+        files = []
+        plotDict = dict()
+        timestamps = []
+        dateTimeFormat = "%Y-%m-%dT%H:%M:%S"
+
+        for file in filesList:
+            if '\\' not in file:
+                my_path = os.path.abspath(os.path.dirname(__file__)) + "/input files/" + file
+                files.append(my_path)
+            elif '\\' in file:
+                files.append(file)
+
+        allXs = []
+        allYs = []
+        for file in files:
+            rows = []
+            fh = open(file)
+            csvReader = csv.reader(fh)
+
+            # generates headers and rows lists
+            header = next(csvReader)
+            for item in header:
+                header[header.index(item)] = item.lower()
+            for row in csvReader:
+                rows.append(row)
+
+            if "timestamp" in header:
+                index = header.index("timestamp")
+                for row in rows:
+                    if 'T' not in row[index]:
+                        temp = row[index].split(' ')
+                        row[index] = temp[0] + 'T' + temp[1]
+                        timestamps.append(row[index])
+                    elif 'T' in row[index]:
+                        timestamps.append(row[index])
+            timestamps = list(dict.fromkeys(timestamps))
+            # dates = [datetime.datetime.strptime(ts, "%Y-%m-%dT%H:%M:%S") for ts in timestamps]
+            # dates.sort()
+            # sortedDates = ([datetime.datetime.strftime(ts, "%Y-%m-%dT%H:%M:%S") for ts in dates])
+
+            for item in headersList:
+                item = item.lower()
+                if item in header and "timestamp" in header:
+                    tempXs = []
+                    tempYs = []
+                    for row in rows:
+                        if 'T' not in row[header.index('timestamp')]:
+                            temp = row[header.index('timestamp')].split(' ')
+                            row[header.index('timestamp')] = temp[0] + 'T' + temp[1]
+                            tempXs.append(row[header.index('timestamp')])
+                        elif 'T' in row[header.index('timestamp')]:
+                            tempXs.append(row[header.index('timestamp')])
+                        tempYs.append(row[header.index(item)])
+                    allXs.append(tempXs)
+                    allYs.append(tempYs)
+
+        plt.figure(figsize=(15, 9))
+        i = 0
+        for i in range(0, len(allXs)):
+            for item in allXs[i]:
+                allXs[i][allXs[i].index(item)] = timestamps.index(item)
+            # print(allXs)
+            for j in range(0, len(allYs[i])):
+                allYs[i][j] = float(allYs[i][j])
+                if not isinstance(allYs[i][j], float):
+                    print("error")
+            plt.plot(allXs[i], allYs[i])
+
+
+        plt.xlabel('x - axis')
+        plt.ylabel('y - axis')
+        # a = []
+        # b = []
+        # for i in range(0, 100, 10):
+        #     b.append(timestamps[int(len(timestamps) * i / 100)])
+        # plt.xticks(a, b, rotation=45)
+        plt.show()
+
+    @staticmethod
+    def plotPandas(filesList):
+
+        file = "/home/amirhossein/Documents/GitHub/new-temp/input files/pollutionData158324.csv"
+        fh = open(file)
+        csvReader = csv.reader(fh)
+        # generates headers and rows lists
+        headers = next(csvReader)
+
+        df = pd.read_csv(file, names=headers)
+
+        # df['timestamp'] = df['timestamp'].map(lambda x: datetime.strptime(str(x), "%Y-%m-%d %H:%M:%S"))
+        x = df['timestamp']
+        y = df["carbon_monoxide"]
+
+        finalYs = []
+        finalXs = []
+
+        for i in range(1, len(x)):
+            finalXs.append(x[i])
+        for item in y:
+            try:
+                finalYs.append(int(item))
+            except:
+                continue
+
+        plt.plot(finalXs, finalYs)
+
+
+        file = "/home/amirhossein/Documents/GitHub/new-temp/input files/pollutionData158355.csv"
+        fh = open(file)
+        csvReader = csv.reader(fh)
+
+        # generates headers and rows lists
+        headers = next(csvReader)
+
+        df = pd.read_csv(file, names=headers)
+
+        # df['timestamp'] = df['timestamp'].map(lambda x: datetime.strptime(str(x), "%Y-%m-%d %H:%M:%S"))
+        x = df['timestamp']
+        y = df["carbon_monoxide"]
+        finalYs = []
+        finalXs = []
+        for i in range(1, len(x)):
+            finalXs.append(x[i])
+        for item in y:
+            try:
+                finalYs.append(int(item))
+            except:
+                continue
+
+
+        plt.plot(finalXs, finalYs)
+        plt.gcf().autofmt_xdate()
+
+        plt.xlabel('Load On Sample')
+        plt.ylabel('Displacement Into Surface')
+        plt.gca().set_xticks([0, 500, 1000, 1500, 2000])
+        plt.gca().set_yticks([0, 50, 100, 150, 200])
+        plt.show()
+
+
