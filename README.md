@@ -1,5 +1,5 @@
 # CSV-Modificator
-### A brief explanation about each method and its arguments <br/> <br/>
+### A brief explanation about methods that this project provides is given in this document <br/> <br/>
 
 ------------------------------------------------------
 **plotLineChart method :<br/>**
@@ -19,7 +19,7 @@ Calling this staticmethod on CSV files will plot values of second argument (E.g.
 ------------------------------------------------------
 **plotCustomLineCharts method :<br/>**
 <br/>
-Arguments if this staticmethod are lists which contains full address or name of the file as first element and the column header to be plotted as second header. X axises are regular standard time lines and x axis ticks contain all timestamps even if they are not in the CSV file's rows. Examples are as follow:
+Arguments if this staticmethod are lists which contain full address or just the name of the file as first element and the column header to be plotted as second element of the list. X axises are regular standard time lines and x axis ticks contain all timestamps even if they are not in the CSV file's rows. Examples are as follow:
 <br/>
 
 **example 1** : 
