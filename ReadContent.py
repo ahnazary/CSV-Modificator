@@ -209,15 +209,17 @@ class ReadContent():
         self.writeNewCSVFile(self.header, self.rows)
 
     @staticmethod
-    def plotLineChart(firstFile, secondFile, *yLabels):
+    def plotLineChart(inputFiles, *yLabels):
         files = []
         plotDict = dict()
-
-        for file in [firstFile, secondFile]:
+        filename = ""
+        for file in inputFiles:
             if '\\' not in file:
+                filename = file
                 my_path = os.path.abspath(os.path.dirname(__file__)) + "/input files/" + file
                 files.append(my_path)
             elif '\\' in file:
+                filename = file.split('/')[-1]
                 files.append(file)
 
         for file in files:
@@ -258,7 +260,7 @@ class ReadContent():
 
                     plt.figure(figsize=(15, 9))
                     plt.plot(Xs, Ys)
-                    plt.title(file)
+                    plt.title(filename)
                     plt.xlabel("time")
                     plt.ylabel(item)
                     a = []
@@ -267,8 +269,8 @@ class ReadContent():
                         a.append(i)
                         b.append(timeStamps[int(len(timeStamps) * i / 100)])
                     plt.xticks(a, b, rotation=45)
-                    return [Xs, Ys, a, b]
-                    # plt.show()
+                    plt.show()
+                    # return [Xs, Ys, a, b]
             fh.close()
 
     @staticmethod
@@ -382,11 +384,11 @@ class ReadContent():
                 for header in headers:
                     headers[headers.index(header)] = header.lower()
                 df = pd.read_csv(fh, names=headers)
-                if inputList[1] not in headers:
-                    raise Exception("there is no such header in ", inputList[0], " please check inputs")
+                if inputList[1].lower() not in headers:
+                    raise Exception("there is no header", inputList[1], " in ", inputList[0], " please check inputs")
 
                 x = df['timestamp']
-                y = df[inputList[1]]
+                y = df[inputList[1].lower()]
                 finalYs = []
                 finalXs = []
                 for i in range(0, len(x)):
@@ -402,17 +404,17 @@ class ReadContent():
                 axs[indexSubPlot].plot(finalXs, finalYs, label=fileName)
                 plt.plot(finalXs, finalYs, label=title)
                 axs[indexSubPlot].legend()
-                axs[indexSubPlot].legend(bbox_to_anchor=(0.97,1), loc="upper left")
+                axs[indexSubPlot].legend(bbox_to_anchor=(0.97, 1), loc="upper left")
                 axs[indexSubPlot].set(xlabel="time stamp (Standard)")
-                axs[indexSubPlot].set_ylabel(title, rotation=0)
+                axs[indexSubPlot].set_ylabel(title, rotation=0, labelpad=60)
                 # axs[indexSubPlot].tick_params(labelrotation=45)
 
                 indexSubPlot += 1
 
             axs[-1].set(xlabel="time stamp (Standard)")
-            axs[-1].set_ylabel("all lines together", rotation=0)
+            axs[-1].set_ylabel("all lines together", rotation=0, labelpad=60)
             axs[-1].legend()
-            axs[-1].legend(bbox_to_anchor=(0.97,1), loc="upper left")
+            axs[-1].legend(bbox_to_anchor=(0.97, 1), loc="upper left")
             # manager = plt.get_current_fig_manager()
             # manager.full_screen_toggle()
             plt.xticks(rotation=45)

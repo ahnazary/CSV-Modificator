@@ -51,12 +51,19 @@ for file in glob.glob(path):
         # print("headers are : ", readContent.getHeaders())
         # print("number of rows is : ", readContent.getSize(), "\n")
 
-# ReadContent.plotLineChart("pollutionData158324.csv", "pollutionData158355.csv", "carbon_monoxide")
+# ReadContent.plotLineChart(["pollutionData158324.csv", "pollutionData158355.csv"], "carbon_monoxide")
 # ReadContent.plotOneLineChartFromMultipleFiles(["pollutionData158324.csv", "pollutionData158355.csv"],
 #                                               ["carbon_monoxide", "vehicleCount"])
 
-# ReadContent.plotPandas(["trafficData158324.csv"])
 
-ReadContent.plotCustomLineCharts(["pollutionData158324.csv", "carbon_monoxide"],
+# ReadContent.plotCustomLineCharts(["pollutionData158324.csv", "particullate_matter"],
+#                                  ["pollutionData158324.csv", "carbon_monoxide"],
+#                                  ["pollutionData158324.csv", "sulfure_dioxide"],
+#                                  ["pollutionData158324.csv", "nitrogen_dioxide"], format='one by one')
+#
+# ReadContent.plotCustomLineCharts(["pollutionData158324.csv", "carbon_monoxide"],
+#                                  ["pollutionData158355.csv", "carbon_monoxide"], format='one by one')
+
+ReadContent.plotCustomLineCharts(["trafficData158324.csv", "avgSpeed"],
                                  ["trafficData158324.csv", "vehiclecount"],
                                  format='one by one')
