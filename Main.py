@@ -58,14 +58,14 @@ for file in glob.glob(path):
 #                                               ["carbon_monoxide", "vehicleCount"])
 #
 #
-ReadContent.plotCustomLineCharts(["pollutionData158324.csv", "particullate_matter"],
-                                 ["pollutionData158324.csv", "carbon_monoxide"],
-                                 ["pollutionData158324.csv", "sulfure_dioxide"],
-                                 ["pollutionData158324.csv", "nitrogen_dioxide"], format='one by one')
+# ReadContent.plotCustomLineCharts(["pollutionData158324.csv", "particullate_matter"],
+#                                  ["pollutionData158324.csv", "carbon_monoxide"],
+#                                  ["pollutionData158324.csv", "sulfure_dioxide"],
+#                                  ["pollutionData158324.csv", "nitrogen_dioxide"], format='one by one')
+#
+# ReadContent.plotCustomLineCharts(["pollutionData158324.csv", "carbon_monoxide"],
+#                                  ["pollutionData158355.csv", "carbon_monoxide"], format='one by one')
 
 ReadContent.plotCustomLineCharts(["pollutionData158324.csv", "carbon_monoxide"],
-                                 ["pollutionData158355.csv", "carbon_monoxide"], format='one by one')
-
-ReadContent.plotCustomLineCharts(["trafficData158324.csv", "avgSpeed"],
                                  ["trafficData158324.csv", "vehiclecount"],
                                  format='one by one')
