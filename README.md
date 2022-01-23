@@ -25,19 +25,19 @@ Arguments if this staticmethod are lists which contains full address or name of 
 <br/>
 <img src="README_Docs/call1.png" width="600">
 <br/>
-<img src="README_Docs/Figure_5_plotCustomLineCharts.png" width="900">
+<img src="README_Docs/Figure_4_plotCustomLineCharts.png" width="900">
 
 **example 2** :
 <br/>
 <img src="README_Docs/call2.png" width="600">
 <br/>
-<img src="README_Docs/Figure_5_plotCustomLineCharts.png" width="900">
+<img src="README_Docs/Figure_2_plotCustomLineCharts.png" width="900">
 <br/>
 **example 3** :
 <br/>
 <img src="README_Docs/call3.png" width="450">
 <br/>
-<img src="README_Docs/Figure_2_plotCustomLineCharts.png" width="900">
+<img src="README_Docs/Figure_5_plotCustomLineCharts.png" width="900">
 <br/>
 **example 4** :
 <br/>
