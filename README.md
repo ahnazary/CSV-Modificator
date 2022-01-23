@@ -21,25 +21,32 @@ Calling this staticmethod on CSV files will plot values of second argument (E.g.
 <br/>
 Arguments if this staticmethod are lists which contains full address or name of the file as first element and the column header to be plotted as second header. X axises are regular standard time lines and x axis ticks contain all timestamps even if they are not in the CSV file's rows. Examples are as follow:
 <br/>
+
 **example 1** : 
+<br/>
+<img src="README_Docs/example1 call.png" width="600">
+<br/>
+<img src="README_Docs/example1.png" width="900">
+
+**example 2** : 
 <br/>
 <img src="README_Docs/call1.png" width="600">
 <br/>
 <img src="README_Docs/Figure_4_plotCustomLineCharts.png" width="900">
 
-**example 2** :
+**example 3** :
 <br/>
 <img src="README_Docs/call2.png" width="600">
 <br/>
 <img src="README_Docs/Figure_2_plotCustomLineCharts.png" width="900">
 <br/>
-**example 3** :
+**example 4** :
 <br/>
 <img src="README_Docs/call3.png" width="450">
 <br/>
 <img src="README_Docs/Figure_5_plotCustomLineCharts.png" width="900">
 <br/>
-**example 4** :
+**example 5** :
 <br/>
 <img src="README_Docs/Figure_4_plotCustomLineCharts.png" width="900">
 <br/>
