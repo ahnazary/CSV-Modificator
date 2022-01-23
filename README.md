@@ -2,6 +2,25 @@
 ### A brief explanation about each method and its arguments <br/> <br/>
 
 ------------------------------------------------------
+**plotLineChart method :<br/>**
+<img src="README_Docs/plotlinecahrts callpng" width="250">
+<br/>
+Calling this staticmethod on CSV files will plot values of second argument (E.g. "carbon_monoxide") with regards to tiemstamps. First argument containing the CSV files names, can include multiple files or just one. In case multiple files gives, charts will be plotted separately. X axis which includes timestamps, is not a standard time line, but it is set based on the data available in the CSV fiel, in other words X axis only contains ticks which are in the CSV file and not based on a regular standard time line.
+example 1 :
+<br/>
+<img src="README_Docs/Figure_1.png" width="400">
+
+example 2 :
+<br/>
+<img src="README_Docs/Figure_2_plotLineChart.png" width="450">
+<br/> 
+
+A SQL database containing initial and formatted addresses of location is created for higher effiency:
+<br/>
+<img src="README_Docs/SQLAddress.png" width="450">
+<br/> 
+
+------------------------------------------------------
 **createFormattedAddressColumn method :<br/>**
 <img src="README_Docs/method call_createFormattedAddressColumn.png" width="250">
 <br/>
