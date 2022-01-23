@@ -1,5 +1,6 @@
 import glob
 import os
+from datetime import datetime
 
 import pandas as pd
 from matplotlib import pyplot as plt
@@ -14,6 +15,7 @@ path = os.path.join(my_path, "input files/*")
 # df['timestamp'] = pd.to_datetime(df['timestamp']).dt.strftime('%Y-%m-%d %H:%M:%S')
 # df.sort_values('timestamp', inplace=True)
 # df.to_csv('result.csv', index=False)
+
 
 for file in glob.glob(path):
     if ReadContent.getFileFormat(file) == "txt":
@@ -53,4 +55,8 @@ for file in glob.glob(path):
 # ReadContent.plotOneLineChartFromMultipleFiles(["pollutionData158324.csv", "pollutionData158355.csv"],
 #                                               ["carbon_monoxide", "vehicleCount"])
 
-ReadContent.plotPandas(["trafficData158324.csv"])
+# ReadContent.plotPandas(["trafficData158324.csv"])
+
+ReadContent.plotCustomLineCharts(["pollutionData158324.csv", "carbon_monoxide"],
+                                 ["trafficData158324.csv", "vehiclecount"],
+                                 format='one by one')
