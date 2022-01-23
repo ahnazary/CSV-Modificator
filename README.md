@@ -3,26 +3,49 @@
 
 ------------------------------------------------------
 **plotLineChart method :<br/>**
-<img src="README_Docs/plotlinecahrts callpng" width="250">
+<img src="README_Docs/plotcustomlinechartscallfunction.png" width="600">
 <br/>
 Calling this staticmethod on CSV files will plot values of second argument (E.g. "carbon_monoxide") with regards to tiemstamps. First argument containing the CSV files names, can include multiple files or just one. In case multiple files gives, charts will be plotted separately. X axis which includes timestamps, is not a standard time line, but it is set based on the data available in the CSV fiel, in other words X axis only contains ticks which are in the CSV file and not based on a regular standard time line.
-example 1 :
 <br/>
-<img src="README_Docs/Figure_1.png" width="400">
+**example 1** :
+<br/>
+<img src="README_Docs/Figure_1.png" width="900">
 
-example 2 :
+**example 2** :
 <br/>
-<img src="README_Docs/Figure_2_plotLineChart.png" width="450">
-<br/> 
+<img src="README_Docs/Figure_2_plotLineChart.png" width="900">
+<br/>
 
-A SQL database containing initial and formatted addresses of location is created for higher effiency:
+------------------------------------------------------
+**plotCustomLineCharts method :<br/>**
 <br/>
-<img src="README_Docs/SQLAddress.png" width="450">
-<br/> 
+Arguments if this staticmethod are lists which contains full address or name of the file as first element and the column header to be plotted as second header. X axises are regular standard time lines and x axis ticks contain all timestamps even if they are not in the CSV file's rows. Examples are as follow:
+<br/>
+**example 1** : 
+<br/>
+<img src="README_Docs/call1.png" width="600">
+<br/>
+<img src="README_Docs/Figure_5_plotCustomLineCharts.png" width="900">
+
+**example 2** :
+<br/>
+<img src="README_Docs/call2.png" width="600">
+<br/>
+<img src="README_Docs/Figure_5_plotCustomLineCharts.png" width="900">
+<br/>
+**example 3** :
+<br/>
+<img src="README_Docs/call3.png" width="450">
+<br/>
+<img src="README_Docs/Figure_2_plotCustomLineCharts.png" width="900">
+<br/>
+**example 4** :
+<br/>
+<img src="README_Docs/Figure_4_plotCustomLineCharts.png" width="900">
+<br/>
 
 ------------------------------------------------------
 **createFormattedAddressColumn method :<br/>**
-<img src="README_Docs/method call_createFormattedAddressColumn.png" width="250">
 <br/>
 Calling this classmethod on CSV files which include data referring to a physical location (E.g. "latitude" and "longitude" as the initial data of a location) will add a new column called: "Formatted Address" containing the formatted address of the initial location. An example of this method's function is given below:
 <br/> <br/>
@@ -32,7 +55,7 @@ initial .CSV file :
 
 final .CSV file :
 <br/>
-<img src="README_Docs/geolocation_finalCSV.png" width="450">
+<img src="README_Docs/call2.png" width="450">
 <br/> 
 
 A SQL database containing initial and formatted addresses of location is created for higher effiency:
