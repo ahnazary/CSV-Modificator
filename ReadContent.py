@@ -392,7 +392,6 @@ class ReadContent():
                     finalXs.append(x[i])
 
                 for item in y:
-                    print(item)
                     try:
                         finalYs.append(float(item))
                     except:
