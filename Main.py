@@ -2,20 +2,12 @@ import glob
 import os
 from datetime import datetime
 
-import pandas as pd
-from matplotlib import pyplot as plt
 
 from ReadContent import ReadContent
 from RulesAndFilters import RulesAndFilters
 
 my_path = os.path.abspath(os.path.dirname(__file__))
 path = os.path.join(my_path, "input files/*")
-
-# df = pd.read_csv("/home/amirhossein/Documents/GitHub/new-temp/input files/pollutionData158355.csv", index_col=False)
-# df['timestamp'] = pd.to_datetime(df['timestamp']).dt.strftime('%Y-%m-%d %H:%M:%S')
-# df.sort_values('timestamp', inplace=True)
-# df.to_csv('result.csv', index=False)
-
 
 for file in glob.glob(path):
     if ReadContent.getFileFormat(file) == "txt":
@@ -53,11 +45,6 @@ for file in glob.glob(path):
 
 # ReadContent.plotLineChart(["pollutionData158324.csv", "pollutionData158355.csv"], "carbon_monoxide")
 
-
-# ReadContent.plotOneLineChartFromMultipleFiles(["pollutionData158324.csv", "pollutionData158355.csv"],
-#                                               ["carbon_monoxide", "vehicleCount"])
-#
-#
 # ReadContent.plotCustomLineCharts(["pollutionData158324.csv", "particullate_matter"],
 #                                  ["pollutionData158324.csv", "carbon_monoxide"],
 #                                  ["pollutionData158324.csv", "sulfure_dioxide"],
@@ -67,5 +54,5 @@ for file in glob.glob(path):
 #                                  ["pollutionData158355.csv", "carbon_monoxide"], format='one by one')
 
 ReadContent.plotCustomLineCharts(["pollutionData158324.csv", "carbon_monoxide"],
-                                 ["trafficData158324.csv", "vehiclecount"],
+                                 ["tempm.csv", "tempm"],
                                  format='one by one')
