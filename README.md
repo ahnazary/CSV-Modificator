@@ -6,7 +6,7 @@ Go to the project directory and use the following command to install requirement
 ```
 docker-compose -f docker-compose.yml up
 ```
-<br/>
+
 ------------------------------------------------------
 **plotLineChart method :<br/>**
 <img src="README_Docs/plotcustomlinechartscallfunction.png" width="700">
