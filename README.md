@@ -1,9 +1,15 @@
-# CSV-Modificator
 ### A brief explanation about methods that this project provides is given in this document <br/> <br/>
-
+------------------------------------------------------
+**installing and running zookeeper, Kafka and Kafka-manager :<br/>**
+<br/>
+Go to the project directory and use the following command to install requirements:
+```
+docker-compose -f docker-compose.yml up
+```
+<br/>
 ------------------------------------------------------
 **plotLineChart method :<br/>**
-<img src="README_Docs/plotcustomlinechartscallfunction.png" width="600">
+<img src="README_Docs/plotcustomlinechartscallfunction.png" width="700">
 <br/>
 Calling this staticmethod on CSV files will plot values of second argument (E.g. "carbon_monoxide") with regards to tiemstamps. First argument containing the CSV files names, can include multiple files or just one. In case multiple files gives, charts will be plotted separately. X axis which includes timestamps, is not a standard time line, but it is set based on the data available in the CSV fiel, in other words X axis only contains ticks which are in the CSV file and not based on a regular standard time line.
 <br/>
