@@ -1,14 +1,27 @@
-### A brief explanation about methods that this project provides is given in this document <br/> <br/>
+## Brief explanation about project requirements and functions<br/> <br/>
 ------------------------------------------------------
-**installing and running zookeeper, Kafka and Kafka-manager :<br/>**
-<br/>
-Go to the project directory and use the following command to install requirements:
+### Installing and running zookeeper, Kafka and Kafka-manager:
+
+Run the following command to install requirements in the project directory:
 ```
 docker-compose -f docker-compose.yml up
 ```
+Kafka, Zookeeper and kafka manager should be started after successfully running the command. <br/> <br/>
+### building new cluster:<br/>
+Open Kafka-manager on browser on: **localhost:9000**. <br/> 
+Build a new cluster. Set the Cluster Zookeeper Hosts to: **zookeeper:2181**. <br/> 
+Make sure to enable following options as well:
+ <br/>
+- [x] Enable JMX Polling (Set JMX_PORT env variable before starting kafka server)
+- [x] Poll consumer information (Not recommended for large # of consumers if ZK is used for offsets tracking on older Kafka versions)
+- [x] Enable Active OffsetCache (Not recommended for large # of consumers)
+
+### building new topic: <br/>
+After successfully building a cluster, build a top with the name: **testTopic** 
+run 
 
 ------------------------------------------------------
-**plotLineChart method :<br/>**
+**plotLineChart method: <br/>**
 <img src="README_Docs/plotcustomlinechartscallfunction.png" width="700">
 <br/>
 Calling this staticmethod on CSV files will plot values of second argument (E.g. "carbon_monoxide") with regards to tiemstamps. First argument containing the CSV files names, can include multiple files or just one. In case multiple files gives, charts will be plotted separately. X axis which includes timestamps, is not a standard time line, but it is set based on the data available in the CSV fiel, in other words X axis only contains ticks which are in the CSV file and not based on a regular standard time line.
