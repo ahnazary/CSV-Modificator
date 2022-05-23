@@ -26,7 +26,7 @@ def csvToStr(filePath):
             for cell in row:
                 csvStr = csvStr + str(cell) + ','
             csvStr = csvStr + '\n'
-    return {'csvStr': re.sub(',\n', '\n', csvStr)}
+    return {'csvStr': re.sub(',\n', '\n', csvStr), 'fileName': filePath.split('/')[-1]}
 
 
 producer = KafkaProducer(bootstrap_servers=['localhost:9092'], value_serializer=jsonSerializer)
