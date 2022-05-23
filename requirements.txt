@@ -1,0 +1,8 @@
+Faker
+kafka-python
+matplotlib
+numpy
+pandas
+pyspark
+python_dateutil
+reverse_geocoder

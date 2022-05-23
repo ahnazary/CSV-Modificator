@@ -7,8 +7,6 @@ import time
 
 from kafka import KafkaProducer
 
-from Data import get_registered_user
-
 projectPath = os.path.abspath(os.path.dirname(__file__))
 inputFilesPath = os.path.join(projectPath, "input files/*")
 outputFilesPath = os.path.join(projectPath, "output files")
