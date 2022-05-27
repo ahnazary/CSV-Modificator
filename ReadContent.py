@@ -9,7 +9,6 @@ import reverse_geocoder as rg
 import datetime
 from datetime import datetime
 from dateutil import parser
-import matplotlib.dates as mdates
 
 from dateutil.parser import parse
 
