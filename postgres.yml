@@ -1,0 +1,18 @@
+version: '3'
+services:
+  postgres-service:
+    image: postgres:latest
+    container_name: postgres-container
+    ports:
+      - 5432:5432/tcp
+    environment:
+      POSTGRES_DB: pg_db
+      POSTGRES_PASSWORD: password
+  pgadmin-service:
+    image: dpage/pgadmin4
+    container_name: pgadmin-container
+    ports:
+      - 5555:80/tcp
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: password
