@@ -23,6 +23,7 @@ class Spark:
         self.dbFileName = fileName.split('.')[0]
         self.fileName = fileName.split('.')[0] + '(modified).' + fileName.split('.')[-1]
         print('file name is : {}'.format(self.fileName))
+        self.removeTempFile()
         f = open(tempFilePath, "a")
         f.write(csv)
         f.close()
@@ -35,9 +36,21 @@ class Spark:
         spark = SparkSession.builder.appName('Practice').getOrCreate()
         dfPyspark = spark.read.option('header', 'true').csv(tempFilePath, inferSchema=True)
         if kwargs['dropna']:
-            dfPyspark = dfPyspark.na.drop(how='any')
+            try:
+                dfPyspark = dfPyspark.na.drop(how='any')
+            except:
+                raise Exception('dropna is not supported for this data type')
         if kwargs['min_avgSpeed'] is not None:
-            dfPyspark = dfPyspark.filter("avgSpeed>=" + str(kwargs['min_avgSpeed']))
+            try:
+                dfPyspark = dfPyspark.filter("avgSpeed>=" + str(kwargs['min_avgSpeed']))
+            except:
+                raise Exception('min_avgSpeed does not exist in this data frame')
+        if kwargs['max_avgSpeed'] is not None:
+            try:
+                dfPyspark = dfPyspark.filter("avgSpeed<=" + str(kwargs['max_avgSpeed']))
+            except:
+                raise Exception('max_avgSpeed does not exist in this data frame')
+
         self.deleteIfDirExists(os.path.join(outputFilesPath, self.fileName))
         dfPyspark.write.option("header", True).csv(os.path.join(outputFilesPath, self.fileName))
         return dfPyspark
@@ -48,7 +61,7 @@ class Spark:
 
     def writeToDB(self, sparkDF):
         con = psycopg2.connect(
-            host="172.18.0.5",
+            host="172.18.0.4",
             database="SparkConsumer",
             user="user",
             password="admin")
@@ -62,10 +75,9 @@ class Spark:
                 queryStr = queryStr + sparkDF.schema.names[i] + ' ' + typeStr + ');'
             else:
                 queryStr = queryStr + sparkDF.schema.names[i] + ' ' + typeStr + ', '
-        print(queryStr)
+        # print(queryStr)
         cur.execute(queryStr)
         queryStr = 'INSERT INTO {}'.format(self.dbFileName)
-        # cur.execute('INSERT INTO trafficData158324 (status, avgMeasuredTime, avgSpeed, extID, medianMeasuredTime, TIMESTAMP, vehicleCount, _id, REPORT_ID) VALUES (\'OK\', 46, 80, 668, 46, \'2014-08-01 17:15:00\', 1, 20796485, 158324)')
         for i in range(len(sparkDF.schema.names)):
             if i == 0:
                 queryStr += '({}, '.format(sparkDF.schema.names[i])
@@ -87,7 +99,7 @@ class Spark:
                 if iNum != len(row) - 1 and iNum != 0:
                     queryStr += '{}, '.format(j)
                 iNum += 1
-            print(queryStr)
+            # print(queryStr)
             cur.execute(queryStr)
             queryStr = checkPointStr
 
