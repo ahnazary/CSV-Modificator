@@ -1,13 +1,13 @@
 ## Brief explanation about project requirements and functions<br/> <br/>
 ------------------------------------------------------
-### Installing and running zookeeper, Kafka and Kafka-manager:
+### Required services:
 
-Run the following command to install requirements in the project directory:
+Run the following command to launch requirements in the project directory:
 ```
 docker-compose -f docker-compose.yml up
 ```
-Kafka, Zookeeper and kafka manager should be started after successfully running the command. <br/> <br/>
-### building new cluster:<br/>
+Kafka, Zookeeper, kafka manager, postgres and pgAdmin should be started after successfully running mentioned command. <br/> <br/>
+### building new cluster in kafka manager:<br/>
 Open Kafka-manager on browser on: **localhost:9000**. <br/> 
 Build a new cluster. Set the Cluster Zookeeper Hosts to: **zookeeper:2181**. <br/> 
 Make sure to enable following options as well:
@@ -18,7 +18,12 @@ Make sure to enable following options as well:
 
 ### building new topic: <br/>
 After successfully building a cluster, build a top with the name: **testTopic** 
-run 
+
+### building new database and server in pgAdmin: <br/>
+Open pgAdmin on browser on: **localhost:5555**. <br/> 
+Create a new server. 
+Set the database username and password to 'user' and 'admin' respectively. (in case any other arbitrary combination used, database credentials should be modified correspondingly)
+
 
 ------------------------------------------------------
 **plotLineChart method: <br/>**
